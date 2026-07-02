@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conciertos Conectados</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo" id="nav-logo">🎵 Conciertos Conectados</div>
+        <nav>
+            <button id="btn-nav-client" class="btn active">Eventos</button>
+            <button id="btn-nav-admin" class="btn btn-secondary">Admin</button>
+            <button id="btn-open-cart" class="btn btn-cart">🛒 Carrito (<span id="cart-count">0</span>)</button>
+        </nav>
+    </header>
+
+    <main id="app-container"></main>
+
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-cart">&times;</span>
+            <h2>Tu Carrito de Entradas</h2>
+            <div id="cart-items"></div>
+            <div class="cart-total">Total: $<span id="cart-total-val">0</span></div>
+            
+            <form id="checkout-form" class="hidden">
+                <h3>Datos de Facturación</h3>
+                <input type="text" id="cust-doc" placeholder="Número de Identificación" required>
+                <input type="text" id="cust-name" placeholder="Nombre Completo" required>
+                <input type="text" id="cust-dir" placeholder="Dirección" required>
+                <input type="tel" id="cust-tel" placeholder="Teléfono" required>
+                <input type="email" id="cust-email" placeholder="Correo Electrónico" required>
+                <button type="submit" class="btn btn-success">Finalizar Compra</button>
+            </form>
+            <button id="btn-go-to-checkout" class="btn">Proceder al Pago</button>
+        </div>
+    </div>
+
+    <script src="main.js" type="module"></script>
+</body>
+</html>
