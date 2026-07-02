@@ -17,15 +17,31 @@
         </nav>
     </header>
 
+   
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="featured-tag">★ EVENTO DESTACADO</span>
+            <h1>SUPER CONCIERTO FERIA DE CÚCUTA 2026</h1>
+            <p>El gran concierto de pago reunirá a Grupo Firme (con su gira La Última Peda) y a Silvestre Dangond (con El Baile de Todos)</p>
+            <div class="hero-buttons">
+                <button class="btn-primary">Ver Boletos</button>
+                <button class="btn-secondary">Ver Trailer</button>
+            </div>
+        </div>
+    </section>
+
+
     <main id="app-container"></main>
 
+  
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close-modal" id="close-cart">&times;</span>
             <h2>Tu Carrito de Entradas</h2>
             <div id="cart-items"></div>
             <div class="cart-total">Total: $<span id="cart-total-val">0</span></div>
-            
+
             <form id="checkout-form" class="hidden">
                 <h3>Datos de Facturación</h3>
                 <input type="text" id="cust-doc" placeholder="Número de Identificación" required>
@@ -38,7 +54,6 @@
             <button id="btn-go-to-checkout" class="btn">Proceder al Pago</button>
         </div>
     </div>
-        <Script src="js/main.js"></Script>
-    <script src="main.js" type="module"></script>
+|   <script src="js/main.js"></script>
 </body>
 </html>
