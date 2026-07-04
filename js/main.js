@@ -1,33 +1,5 @@
-localStorage.clear(); 
-const initLocalStorage = () => {
-    if (!localStorage.getItem('categories')) {
-        localStorage.setItem('categories', JSON.stringify([
-            { id: "1", name: "Rock", description: "Conciertos de Rock y Metal" },
-            { id: "2", name: "Pop", description: "Música Pop internacional y nacional" },
-            { id: "3", name: "Reggaeton", description: "Género urbano y fiesta" },
-            { id: "4", name: "Vallenato", description: "Folclor y clásicos vallenatos" }
-        ]));
-    }
-   if (!localStorage.getItem('events')) {
-    localStorage.setItem('events', JSON.stringify([
-        { id: "EV01", name: "Rock Fest 2026", category: "Rock", price: 150000, date: "2026-08-15", hour: "20:00", city: "Bogotá", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoQ8AvBUvEMPJHcDO0d3VvFagv_1BWRRc_S8-8RDC3kg&s=10", desc: "El festival de rock más grande del año con bandas nacionales e internacionales." },
-        { id: "EV02", name: "Pop Queen Tour", category: "Pop", price: 220000, date: "2026-09-20", hour: "19:00", city: "Medellín", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRovF-X7E8Dz1IQmInaJQDKaHzcbvcEfoxSHK-CeYsAiFLWVursRrXAyLLy&s=10", desc: "La reina del pop llega a la ciudad de la eterna primavera en su gira mundial." },
-        { id: "EV03", name: "Vallenato al Parque", category: "Vallenato", price: 80000, date: "2026-10-05", hour: "18:00", city: "Bucaramanga", img: "https://cloudfront-us-east-1.images.arcpublishing.com/elespectador/ZGLIVQ7TOJAIJBH7WPXUVWJHMM.png", desc: "Una noche inolvidable con los mejores acordeoneros y compositores del país." },
-        { id: "EV04", name: "Urban Flow Arena", category: "Reggaeton", price: 180000, date: "2026-11-12", hour: "21:00", city: "Barranquilla", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPvr2VA4MFe3Y1zC39CdUlAH69RnHPgP8CHL_QCKQ0WHiYKC9qF4oYyKqW&s=10", desc: "El evento de género urbano más esperado del caribe con los artistas del momento." },
-        { id: "EV05", name: "Electro Pop Night", category: "Pop", price: 130000, date: "2026-12-13", hour: "22:00", city: "Bogotá", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmV9Itvv9RwnYVBxJwGuA9ggctJ-ytRbg48oPta7RGBQ&s=10", desc: "Una experiencia audiovisual única que combina voces pop con beats electrónicos." },
-        { id: "EV06", name: "Indie Rock Sunset", category: "Rock", price: 95000, date: "2026-08-18", hour: "16:00", city: "Bucaramanga", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBoqmb43GDjTSWj9WQHERxfOFcUWOUnaAwSCLBhQ2W6Q&s=10", desc: "Disfruta del mejor rock alternativo al aire libre durante el atardecer." },
-        { id: "EV07", name: "La Eterna Parranda", category: "Vallenato", price: 110000, date: "2026-08-29", hour: "20:00", city: "Barranquilla", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiu7a-xiti0XUhEpRyWNDb_HJj3bHRr0siXTt2A3xAfQ&s=10", desc: "Los grandes clásicos del vallenato en un solo escenario frente al mar." },
-        { id: "EV08", name: "Reggaeton Legends", category: "Reggaeton", price: 250000, date: "2026-12-01", hour: "20:00", city: "Medellín", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwxBPMEX3FtMaZtu7Rq59uUDnYC03xKEL156ukMg_8wg&s=10", desc: "Los pioneros del género urbano se reúnen en un concierto histórico." },
-        { id: "EV09", name: "SUPER CONCIERTO FERIA DE CÚCUTA 2026", category: "Vallenato", price: 250000, date: "2026-07-18", hour: "19:00", city: "Cucuta", img: "https://www.tuboleta.com/sites/default/files/2026-05/WhatsApp%20Image%202026-05-25%20at%2011.14.35%20AM.jpeg", desc: "El gran concierto de pago reunirá a Grupo Firme (con su gira La Última Peda) y a Silvestre Dangond (con El Baile de Todos)" }
-    ]));
-}
-    if (!localStorage.getItem('sales')) localStorage.setItem('sales', JSON.stringify([]));
-};
-initLocalStorage();
-
 let cart = [];
 let currentView = 'client-events'; 
-let adminSubView = 'categories';
 
 const appContainer = document.getElementById('app-container');
 const cartModal = document.getElementById('cart-modal');
@@ -53,8 +25,8 @@ const renderApp = () => {
 };
 
 const renderClientEvents = () => {
-    const events = JSON.parse(localStorage.getItem('events'));
-    const categories = JSON.parse(localStorage.getItem('categories'));
+    const events = getStorageData('events');
+    const categories = getStorageData('categories');
 
     appContainer.innerHTML = `
         <div class="container">
@@ -119,7 +91,7 @@ const renderClientEvents = () => {
 };
 
 const renderEventDetail = (id) => {
-    const events = JSON.parse(localStorage.getItem('events'));
+    const events = getStorageData('events');
     const ev = events.find(e => e.id === id);
 
     if (!ev) {
@@ -145,146 +117,8 @@ const renderEventDetail = (id) => {
     document.getElementById('btn-add-cart-detail').addEventListener('click', () => addToCart(ev.id));
 };
 
-const renderAdminLogin = () => {
-    appContainer.innerHTML = `
-        <div class="container" style="max-width: 400px; margin: 5rem auto; background: white; padding: 2.5rem; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-            <h2 style="margin-bottom: 1.5rem; text-align: center;">Acceso Administrador</h2>
-            <form id="login-form" style="display:flex; flex-direction:column; gap:1rem;">
-                <input type="email" id="login-email" placeholder="admin@mail.com" required style="padding: 0.8rem; border: 1px solid #ccc; border-radius:5px;">
-                <input type="password" id="login-pass" placeholder="••••••" required style="padding: 0.8rem; border: 1px solid #ccc; border-radius:5px;">
-                <button type="submit" class="btn">Ingresar</button>
-            </form>
-        </div>
-    `;
-
-    document.getElementById('login-form').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = document.getElementById('login-email').value;
-        const pass = document.getElementById('login-pass').value;
-
-        if (email === 'admin@mail.com' && pass === '123456') {
-            alert('¡Bienvenido Administrador!');
-            currentView = 'admin-dashboard';
-            renderApp();
-        } else {
-            alert('Credenciales incorrectas. Intente de nuevo.');
-        }
-    });
-};
-
-const renderAdminDashboard = () => {
-    appContainer.innerHTML = `
-        <div class="container">
-            <h2>Dashboard de Control</h2>
-            <div class="admin-layout">
-                <div class="admin-menu">
-                    <button class="btn ${adminSubView==='categories'?'':'btn-secondary'}" id="sub-cat">Categorías</button>
-                    <button class="btn ${adminSubView==='events'?'':'btn-secondary'}" id="sub-ev">Eventos</button>
-                    <button class="btn ${adminSubView==='sales'?'':'btn-secondary'}" id="sub-sales">Ventas</button>
-                </div>
-                <div class="admin-content" id="admin-sub-content"></div>
-            </div>
-        </div>
-    `;
-
-    document.getElementById('sub-cat').addEventListener('click', () => { adminSubView = 'categories'; renderAdminDashboard(); });
-    document.getElementById('sub-ev').addEventListener('click', () => { adminSubView = 'events'; renderAdminDashboard(); });
-    document.getElementById('sub-sales').addEventListener('click', () => { adminSubView = 'sales'; renderAdminDashboard(); });
-
-    const subContent = document.getElementById('admin-sub-content');
-
-    if (adminSubView === 'categories') {
-        const categories = JSON.parse(localStorage.getItem('categories'));
-        subContent.innerHTML = `
-            <h3>Módulo de Categorías</h3>
-            <button class="btn" id="btn-add-cat" style="margin: 1rem 0;">+ Agregar Categoría</button>
-            <table>
-                <thead><tr><th>Nombre</th><th>Descripción</th><th>Acciones</th></tr></thead>
-                <tbody>
-                    ${categories.map(c => `<tr><td>${c.name}</td><td>${c.description}</td><td><button class="btn btn-danger btn-del-cat" data-id="${c.id}">Eliminar</button></td></tr>`).join('')}
-                </tbody>
-            </table>
-        `;
-        document.querySelectorAll('.btn-del-cat').forEach(b => b.addEventListener('click', (e) => {
-            let catList = categories.filter(c => c.id !== e.target.dataset.id);
-            localStorage.setItem('categories', JSON.stringify(catList));
-            renderAdminDashboard();
-        }));
-        document.getElementById('btn-add-cat').addEventListener('click', () => {
-            const name = prompt('Nombre de la categoría:');
-            const description = prompt('Descripción:');
-            if (name && description) {
-                categories.push({ id: Date.now().toString(), name, description });
-                localStorage.setItem('categories', JSON.stringify(categories));
-                renderAdminDashboard();
-            }
-        });
-    } 
-    else if (adminSubView === 'events') {
-        const events = JSON.parse(localStorage.getItem('events'));
-        subContent.innerHTML = `
-            <h3>Módulo de Eventos</h3>
-            <button class="btn" id="btn-create-ev" style="margin:1rem 0;">+ Crear Evento</button>
-            <div style="overflow-x: auto;">
-                <table>
-                    <thead><tr><th>Código</th><th>Nombre</th><th>Ciudad</th><th>Precio</th><th>Acciones</th></tr></thead>
-                    <tbody>
-                        ${events.map(ev => `<tr><td>${ev.id}</td><td>${ev.name}</td><td>${ev.city}</td><td>$${ev.price}</td><td><button class="btn btn-danger btn-del-ev" data-id="${ev.id}">Eliminar</button></td></tr>`).join('')}
-                    </tbody>
-                </table>
-            </div>
-        `;
-        document.querySelectorAll('.btn-del-ev').forEach(b => b.addEventListener('click', (e) => {
-            let evList = events.filter(ev => ev.id !== e.target.dataset.id);
-            localStorage.setItem('events', JSON.stringify(evList));
-            renderAdminDashboard();
-        }));
-        document.getElementById('btn-create-ev').addEventListener('click', () => {
-            const id = prompt('Código único del evento:');
-            const name = prompt('Nombre del evento:');
-            const city = prompt('Ciudad (Barranquilla, Bogotá, Bucaramanga, Medellín):');
-            const price = parseFloat(prompt('Precio:'));
-            const date = prompt('Fecha (AAAA-MM-DD):');
-            const hour = prompt('Hora (HH:MM):');
-            const category = prompt('Categoría (Ej: Rock, Pop):');
-            const img = prompt('URL de Imagen de referencia:');
-            const desc = prompt('Breve descripción:');
-
-            if(id && name && city && price) {
-                events.push({ id, name, city, price, date, hour, category, img, desc });
-                localStorage.setItem('events', JSON.stringify(events));
-                renderAdminDashboard();
-            }
-        });
-    }
-    else if (adminSubView === 'sales') {
-        const sales = JSON.parse(localStorage.getItem('sales')).sort((a,b) => new Date(b.date) - new Date(a.date));
-        subContent.innerHTML = `
-            <h3>Módulo de Ventas</h3>
-            <table>
-                <thead><tr><th>Fecha</th><th>Cliente</th><th>Ciudad (Envío)</th><th>Total</th><th>Detalles</th></tr></thead>
-                <tbody>
-                    ${sales.map((s, index) => `
-                        <tr>
-                            <td>${new Date(s.date).toLocaleString()}</td>
-                            <td>${s.customer.name}</td>
-                            <td>${s.items[0]?.city || 'N/A'}</td>
-                            <td>$${s.total.toLocaleString()}</td>
-                            <td><button class="btn btn-secondary btn-view-sale" data-index="${index}">Ver Todo</button></td>
-                        </tr>
-                    `).join('')}
-                </tbody>
-            </table>
-        `;
-        document.querySelectorAll('.btn-view-sale').forEach(b => b.addEventListener('click', (e) => {
-            const sale = sales[e.target.dataset.index];
-            alert(`Detalle del Pedido:\nCliente: ${sale.customer.name}\nEmail: ${sale.customer.email}\nIdentificación: ${sale.customer.doc}\nTeléfono: ${sale.customer.tel}\nDirección: ${sale.customer.dir}\n\nItems:\n${sale.items.map(i => `- ${i.name} ($${i.price})`).join('\n')}`);
-        }));
-    }
-};
-
 const addToCart = (id) => {
-    const events = JSON.parse(localStorage.getItem('events'));
+    const events = getStorageData('events');
     const ev = events.find(e => e.id === id);
     if (ev) {
         cart.push(ev);
@@ -356,7 +190,7 @@ btnGoToCheckout.addEventListener('click', () => {
 checkoutForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    const sales = JSON.parse(localStorage.getItem('sales'));
+    const sales = getStorageData('sales');
     const total = cart.reduce((acc, item) => acc + item.price, 0);
 
     const newSale = {
@@ -373,7 +207,7 @@ checkoutForm.addEventListener('submit', (e) => {
     };
 
     sales.push(newSale);
-    localStorage.setItem('sales', JSON.stringify(sales));
+    setStorageData('sales', sales);
 
     alert("¡Compra realizada con éxito! Su boleta digital ha sido asignada.");
     

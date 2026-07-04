@@ -1,0 +1,75 @@
+@media (max-width: 768px) {
+    .admin-layout { 
+        flex-direction: column; 
+    }
+    .main-header { 
+        flex-direction: column; 
+        gap: 1rem; 
+    }
+}
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem 4%;
+    }
+
+    .main-header { 
+        flex-direction: column; 
+        gap: 1rem; 
+    }
+
+    .hero-section {
+        padding: 0 5%;
+        height: auto;
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+
+    .grid-events {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .filters-section {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .filters-section input, .filters-section select {
+        width: 100%;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 1.2rem;
+    }
+
+    .admin-layout { 
+        flex-direction: column; 
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+    
+    th, td {
+        padding: 0.5rem;
+    }
+}

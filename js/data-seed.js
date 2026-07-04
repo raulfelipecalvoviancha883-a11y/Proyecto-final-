@@ -1,0 +1,18 @@
+const defaultCategories = [
+    { id: "1", name: "Rock", description: "Conciertos de Rock y Metal" },
+    { id: "2", name: "Pop", description: "Música Pop internacional y nacional" },
+    { id: "3", name: "Reggaeton", description: "Género urbano y fiesta" },
+    { id: "4", name: "Vallenato", description: "Folclor y clásicos vallenatos" }
+];
+
+const defaultEvents = [
+    { id: "EV01", name: "Rock Fest 2026", category: "Rock", price: 150000, date: "2026-08-15", hour: "20:00", city: "Bogotá", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoQ8AvBUvEMPJHcDO0d3VvFagv_1BWRRc_S8-8RDC3kg&s=10", desc: "El festival de rock más grande del año con bandas nacionales e internacionales." },
+    { id: "EV02", name: "Pop Queen Tour", category: "Pop", price: 220000, date: "2026-09-20", hour: "19:00", city: "Medellín", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRovF-X7E8Dz1IQmInaJQDKaHzcbvcEfoxSHK-CeYsAiFLWVursRrXAyLLy&s=10", desc: "La reina del pop llega a la ciudad de la eterna primavera en su gira mundial." },
+    { id: "EV03", name: "Vallenato al Parque", category: "Vallenato", price: 80000, date: "2026-10-05", hour: "18:00", city: "Bucaramanga", img: "https://cloudfront-us-east-1.images.arcpublishing.com/elespectador/ZGLIVQ7TOJAIJBH7WPXUVWJHMM.png", desc: "Una noche inolvidable con los mejores acordeoneros y compositores del país." },
+    { id: "EV04", name: "Urban Flow Arena", category: "Reggaeton", price: 180000, date: "2026-11-12", hour: "21:00", city: "Barranquilla", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPvr2VA4MFe3Y1zC39CdUlAH69RnHPgP8CHL_QCKQ0WHiYKC9qF4oYyKqW&s=10", desc: "El evento de género urbano más esperado del caribe con los artistas del momento." },
+    { id: "EV05", name: "Electro Pop Night", category: "Pop", price: 130000, date: "2026-12-13", hour: "22:00", city: "Bogotá", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmV9Itvv9RwnYVBxJwGuA9ggctJ-ytRbg48oPta7RGBQ&s=10", desc: "Una experiencia audiovisual única que combina voces pop con beats electrónicos." },
+    { id: "EV06", name: "Indie Rock Sunset", category: "Rock", price: 95000, date: "2026-08-18", hour: "16:00", city: "Bucaramanga", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBoqmb43GDjTSWj9WQHERxfOFcUWOUnaAwSCLBhQ2W6Q&s=10", desc: "Disfruta del mejor rock alternativo al aire libre durante el atardecer." },
+    { id: "EV07", name: "La Eterna Parranda", category: "Vallenato", price: 110000, date: "2026-08-29", hour: "20:00", city: "Barranquilla", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiu7a-xiti0XUhEpRyWNDb_HJj3bHRr0siXTt2A3xAfQ&s=10", desc: "Los grandes clásicos del vallenato en un solo escenario frente al mar." },
+    { id: "EV08", name: "Reggaeton Legends", category: "Reggaeton", price: 250000, date: "2026-12-01", hour: "20:00", city: "Medellín", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwxBPMEX3FtMaZtu7Rq59uUDnYC03xKEL156ukMg_8wg&s=10", desc: "Los pioneros del género urbano se reúnen en un concierto histórico." },
+    { id: "EV09", name: "SUPER CONCIERTO FERIA DE CÚCUTA 2026", category: "Vallenato", price: 250000, date: "2026-07-18", hour: "19:00", city: "Cucuta", img: "https://www.tuboleta.com/sites/default/files/2026-05/WhatsApp%20Image%202026-05-25%20at%2011.14.35%20AM.jpeg", desc: "El gran concierto de pago reunirá a Grupo Firme (con su gira La Última Peda) y a Silvestre Dangond (con El Baile de Todos)" }
+];
