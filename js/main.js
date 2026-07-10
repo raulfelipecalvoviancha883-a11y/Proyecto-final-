@@ -219,3 +219,93 @@ checkoutForm.addEventListener('submit', (e) => {
 });
 
 renderApp();
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('modalSugerencia');
+    const btnSugerencia = document.getElementById('btnSugerencia');
+    const closeBtn = document.querySelector('.modal-sugerencia-close');
+    const formSugerencia = document.getElementById('formSugerencia');
+    const tablaBody = document.querySelector('#tablaSugerencias tbody');
+
+    if (btnSugerencia && modal && closeBtn) {
+        btnSugerencia.addEventListener('click', () => {
+            modal.style.display = 'block';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
+
+    if (formSugerencia) {
+        formSugerencia.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const sugerencia = {
+                id: Date.now(),
+                nombre: document.getElementById('nombre').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                mensaje: document.getElementById('mensaje').value.trim(),
+                fecha: new Date().toISOString()
+            };
+
+            const sugerenciasGuardadas = JSON.parse(localStorage.getItem('sugerencias')) || [];
+            sugerenciasGuardadas.push(sugerencia);
+            localStorage.setItem('sugerencias', JSON.stringify(sugerenciasGuardadas));
+
+            alert('¡Muchas gracias! Tu sugerencia ha sido enviada con éxito.');
+            formSugerencia.reset();
+            if (modal) modal.style.display = 'none';
+
+            if (tablaBody) cargarSugerenciasEnTabla();
+        });
+    }
+
+    function cargarSugerenciasEnTabla() {
+        if (!tablaBody) return;
+
+        const sugerencias = JSON.parse(localStorage.getItem('sugerencias')) || [];
+        tablaBody.innerHTML = '';
+
+        if (sugerencias.length === 0) {
+            tablaBody.innerHTML = `
+                <tr>
+                    <td colspan="5" style="text-align: center; color: #9ca3af;">No se han recibido sugerencias en el buzón.</td>
+                </tr>
+            `;
+            return;
+        }
+
+        sugerencias.forEach(sug => {
+            const fila = document.createElement('tr');
+            
+            const fechaFormateada = new Date(sug.fecha).toLocaleString('es-ES', {
+                year: 'numeric', month: 'short', day: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+            });
+
+            fila.innerHTML = `
+                <td><strong>${sug.id}</strong></td>
+                <td>${escapeHTML(sug.nombre)}</td>
+                <td><a href="mailto:${sug.email}">${escapeHTML(sug.email)}</a></td>
+                <td>${escapeHTML(sug.mensaje)}</td>
+                <td>${fechaFormateada}</td>
+            `;
+            tablaBody.appendChild(fila);
+        });
+    }
+
+    function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g, 
+            tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+        );
+    }
+
+    cargarSugerenciasEnTabla();
+});
+

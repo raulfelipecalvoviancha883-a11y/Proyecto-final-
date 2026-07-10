@@ -137,3 +137,27 @@ const renderAdminDashboard = () => {
         }));
     }
 };
+const btnNavAdmin = document.getElementById('btn-nav-admin');
+
+if (btnNavAdmin) {
+    btnNavAdmin.addEventListener('click', () => {
+        cargarPerfilAdministrador();
+    });
+}
+
+function cargarPerfilAdministrador() {
+    fetch('reporte-ventas.html')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('No se pudo cargar el archivo HTML del reporte');
+            }
+            return response.text();
+        })
+        .then(html => {
+            const container = document.getElementById('app-container');
+            container.innerHTML = html;
+
+            inicializarLogicaReporte();
+        })
+        .catch(error => console.error('Error cargando la vista de admin:', error));
+}
